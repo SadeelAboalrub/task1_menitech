@@ -42,7 +42,6 @@ class _ProfilePageState extends State<ProfilePage> {
           phone = doc.data()?['phone'] ?? phone;
         });
       } else {
-        // إذا لم يكن هناك doc في Firestore
         setState(() {
           userName = email.contains('@') ? email.split('@')[0] : "User Name";
         });
@@ -162,7 +161,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     IconButton(
                       icon: const Icon(Icons.edit, color: Colors.white),
                       onPressed: () {
-                        // هنا ممكن تحط صفحة EditProfilePage بدل HomePage
                         Navigator.push(
                           context,
                           MaterialPageRoute(

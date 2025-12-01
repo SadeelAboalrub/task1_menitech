@@ -37,7 +37,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
       if (doc.exists) {
         setState(() {
-          userName = doc.data()?['username'] ??
+          userName =
+              doc.data()?['username'] ??
               (email.contains('@') ? email.split('@')[0] : "User Name");
           phone = doc.data()?['phone'] ?? phone;
         });
@@ -63,7 +64,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff6eedd),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (_) => HomePage()),
+                        MaterialPageRoute(builder: (_) => HomePage(isAdmin: false,)),
                       );
                     },
                   ),
@@ -163,9 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (_) => HomePage(),
-                          ),
+                          MaterialPageRoute(builder: (_) => HomePage(isAdmin: false,)),
                         );
                       },
                     ),
@@ -222,11 +220,32 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(height: 20),
               _divider(),
 
-              _footerItem("FAQS"),
-              _footerItem("ABOUT US"),
-              _footerItem("TERMS OF USE"),
-              _footerItem("PRIVACY POLICY"),
-
+              _footerItem(
+                "FAQS",
+                onTap: () {},
+              ),
+              _footerItem(
+                "ABOUT US",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage(isAdmin: false,)),
+                  );
+                },
+              ),
+              _footerItem(
+                "TERMS OF USE",
+                onTap: () {},
+              ),
+              _footerItem(
+                "PRIVACY POLICY",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage(isAdmin: false,)),
+                  );
+                },
+              ),
               const SizedBox(height: 40),
             ],
           ),
@@ -278,14 +297,18 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _footerItem(String text) {
-    return ListTile(
-      title: Text(
-        text,
-        style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500),
+  Widget _footerItem(String text, {required VoidCallback onTap}) {
+  return ListTile(
+    onTap: onTap,   
+    title: Text(
+      text,
+      style: GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
       ),
-      trailing: const Icon(Icons.chevron_right),
-      contentPadding: EdgeInsets.zero,
-    );
-  }
+    ),
+    trailing: const Icon(Icons.chevron_right),
+    contentPadding: EdgeInsets.zero,
+  );
+}
 }

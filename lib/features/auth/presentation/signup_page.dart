@@ -1,9 +1,9 @@
+import 'package:first_task/core/widgets/customButton.dart';
+import 'package:first_task/core/widgets/customTextFeild.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'login_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:first_task/commonPages/customTextFeild.dart';
-import 'package:first_task/commonPages/customButton.dart';
 
 class SignupPage extends StatefulWidget {
   @override

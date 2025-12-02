@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:first_task/core/widgets/customButton.dart';
+import 'package:first_task/core/widgets/customTextFeild.dart';
+import 'package:first_task/features/admin/presentation/add_products.dart';
 //import 'package:firebase_storage/firebase_storage.dart';
-import 'package:first_task/adminPages/ProductListPage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -91,11 +93,19 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
-            buildField("Category Name", nameCtrl),
-            buildField("Description", descCtrl),
-            buildField("Discount (%)", discountCtrl, number: true),
 
-            SizedBox(height: 15),
+            CustomTextField(hint: "Category Name"),
+
+            SizedBox(height: 20),
+            
+            CustomTextField(hint: "Description"),
+            
+            SizedBox(height: 20),
+            
+            CustomTextField(hint: "Discount"),
+            
+            SizedBox(height: 20),
+            
             GestureDetector(
               onTap: pickImage,
               child: Container(
@@ -120,16 +130,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             ),
 
             SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: loading ? null : uploadCategory,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 80),
-              ),
-              child: loading
-                  ? CircularProgressIndicator(color: Colors.white)
-                  : Text("Save Category", style: TextStyle(fontSize: 16)),
-            ),
+            CustomButton(text: "Save Category", onPressed: uploadCategory),
           ],
         ),
       ),

@@ -1,7 +1,7 @@
-import 'package:first_task/clientPages/brands_page.dart';
-import 'package:first_task/clientPages/cart_page.dart';
-import 'package:first_task/clientPages/categories_page.dart';
-import 'package:first_task/clientPages/profile_page.dart';
+import 'package:first_task/features/client/presentation/brands_page.dart';
+import 'package:first_task/features/client/presentation/cart_page.dart';
+import 'package:first_task/features/client/presentation/categories_page.dart';
+import 'package:first_task/features/client/presentation/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class CategoryModel {

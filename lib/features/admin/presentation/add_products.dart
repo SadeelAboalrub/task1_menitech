@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:first_task/core/res/app_colors.dart';
+import 'package:first_task/core/widgets/customButton.dart';
+import 'package:first_task/core/widgets/customTextFeild.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../commonPages/customButton.dart';
-import '../commonPages/customTextFeild.dart';
 
 class ProductListPage extends StatefulWidget {
   const ProductListPage({super.key});
@@ -94,12 +95,11 @@ class _ProductListPageState extends State<ProductListPage> {
 
   @override
   Widget build(BuildContext context) {
-    const Color mainBlue = Color(0xff1976D2);
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: mainBlue,
+        backgroundColor: AppColors.mainColor,
         elevation: 0,
         title: const Text(
           'Add Products',
@@ -117,7 +117,7 @@ class _ProductListPageState extends State<ProductListPage> {
             Text(
               "Category",
               style: TextStyle(
-                color: mainBlue,
+                color: AppColors.mainColor,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -188,10 +188,10 @@ class _ProductListPageState extends State<ProductListPage> {
             const SizedBox(height: 20),
 
             Text(
-              "Choose Pic",
+              "Choose Picture",
               style: TextStyle(
                 fontSize: 16,
-                color: mainBlue,
+                color: AppColors.mainColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -202,12 +202,12 @@ class _ProductListPageState extends State<ProductListPage> {
               child: Container(
                 height: 150,
                 decoration: BoxDecoration(
-                  border: Border.all(color: mainBlue, width: 1.5),
+                  border: Border.all(color: AppColors.mainColor, width: 1.5),
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.blue.shade50,
                 ),
                 child: pickedImage == null
-                    ? const Center(child: Text("Choose Pic"))
+                    ? const Center(child: Text("Choose Picture"))
                     : Image.file(pickedImage!, fit: BoxFit.cover),
               ),
             ),

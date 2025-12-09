@@ -1,14 +1,23 @@
+import 'package:first_task/features/client/providers/cart_provider.dart';
+import 'package:first_task/features/client/providers/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'core/firebase_options.dart';
-import 'features/auth/presentation/splash_screen.dart'; 
+import 'features/auth/presentation/ui/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ProductProvider()),
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+      ],
+      child: MyApp()
+    ),
   );
-  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +32,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         brightness: Brightness.light,
       ),
-      home: SplashScreen(), 
+      home: SplashScreen(),
     );
   }
 }

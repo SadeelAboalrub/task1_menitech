@@ -82,7 +82,7 @@ class _SignupPageState extends State<SignupPage> {
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF2575FC),
+                            color: Color.fromARGB(255, 0, 0, 0),
                           ),
                         ),
                         SizedBox(height: 30),

@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:first_task/common/widgets/customButton.dart';
-import 'package:first_task/common/widgets/customTextFeild.dart';
+import 'package:first_task/core/widgets/customButton.dart';
+import 'package:first_task/core/widgets/customTextFeild.dart';
 import 'package:first_task/features/client/presentation/home/ui/home_page.dart';
-import 'package:first_task/features/auth/presentation/signup_page.dart';
+import 'package:first_task/features/auth/presentation/ui/signup_page.dart';
 import 'package:flutter/material.dart';
-import '../../admin/presentation/home/ui/admin_home_page.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../../../admin/presentation/home/ui/admin_home_page.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -83,10 +84,9 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'Gemora Jewellery',
-                      style: TextStyle(
+                      'Fashion',
+                      style: GoogleFonts.satisfy(
                         fontSize: 24,
-                        fontFamily: 'GoogleFont',
                         fontWeight: FontWeight.bold,
                       ),
                     ),

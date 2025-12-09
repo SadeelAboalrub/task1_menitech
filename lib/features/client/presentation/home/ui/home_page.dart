@@ -1,8 +1,9 @@
-import 'package:first_task/features/client/presentation/brands_page.dart';
-import 'package:first_task/features/client/presentation/cart_page.dart';
-import 'package:first_task/features/client/presentation/categories_page.dart';
-import 'package:first_task/features/client/presentation/profile_page.dart';
+import 'package:first_task/features/client/presentation/home/ui/brands_page.dart';
+import 'package:first_task/features/client/presentation/home/ui/cart_page.dart';
+import 'package:first_task/features/client/presentation/home/ui/categories_page.dart';
+import 'package:first_task/features/client/presentation/home/ui/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryModel {
   final String name;
@@ -42,9 +43,19 @@ class _HomePageState extends State<HomePage> {
     CategoryModel(name: "Bracelets", image: ""),
     CategoryModel(name: "Gold", image: ""),
     CategoryModel(name: "Diamond", image: ""),
+    CategoryModel(name: "Rings", image: ""),
+    CategoryModel(name: "Necklace", image: ""),
+    CategoryModel(name: "Earrings", image: ""),
+    CategoryModel(name: "Bracelets", image: ""),
+    CategoryModel(name: "Gold", image: ""),
+    CategoryModel(name: "Diamond", image: ""),
   ];
 
   final List<ProductModel> products = [
+    ProductModel(title: "Product 1", image: "", price: 00, oldPrice: 150),
+    ProductModel(title: "Product 2", image: "", price: 00, oldPrice: 110),
+    ProductModel(title: "Product 3", image: "", price: 00, oldPrice: 250),
+    ProductModel(title: "Product 4", image: "", price: 00, oldPrice: 90),
     ProductModel(title: "Product 1", image: "", price: 00, oldPrice: 150),
     ProductModel(title: "Product 2", image: "", price: 00, oldPrice: 110),
     ProductModel(title: "Product 3", image: "", price: 00, oldPrice: 250),
@@ -64,7 +75,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: const Color.fromARGB(255, 0, 0, 0),
         unselectedItemColor: Colors.grey,
         currentIndex: selectedIndex,
         onTap: (index) {
@@ -99,13 +110,13 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const Icon(Icons.menu, size: 28),
                   const Spacer(),
-                  const Text(
-                    "Gemora Jewellery",
-                    style: TextStyle(
+                  Text(
+                    "Fashion",
+                    style: GoogleFonts.adamina(
                       fontSize: 22,
-                      color: Color(0xFF0D1B2A),
+                      color: const Color(0xFF0D1B2A),
                       fontWeight: FontWeight.bold,
-                    ),
+                    )
                   ),
                   const Spacer(),
                   const Icon(Icons.notifications_outlined, size: 28),
@@ -118,7 +129,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               height: 45,
-              color: Colors.blue.shade800,
+              color: const Color.fromARGB(255, 3, 5, 6),
               child: const TextField(
                 decoration: InputDecoration(
                   border: InputBorder.none,

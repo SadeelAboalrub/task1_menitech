@@ -1,3 +1,4 @@
+import 'package:first_task/features/client/presentation/home/ui/category_product.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -28,13 +29,24 @@ class CategoriesView extends StatelessWidget {
               return Card(
                 margin: EdgeInsets.all(12),
                 child: ListTile(
-                  //leading: Image.network(data["image"], width: 60, height: 60, fit: BoxFit.cover),
                   title: Text(data["name"]),
                   subtitle: Text(data["description"] ?? ""),
                   trailing: data["discount"] > 0
                       ? Text("${data['discount']}% OFF",
                           style: TextStyle(color: Colors.red))
                       : null,
+
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => CategoryProductsPage(
+                          categoryId: docs[i].id,
+                          categoryName: data["name"],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               );
             },

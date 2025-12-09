@@ -2,11 +2,9 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_task/core/widgets/customButton.dart';
 import 'package:first_task/core/widgets/customTextFeild.dart';
-import 'package:first_task/features/admin/presentation/add_products.dart';
-//import 'package:firebase_storage/firebase_storage.dart';
+import 'package:first_task/features/admin/presentation/home/ui/add_products.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 
 class AddCategoryPage extends StatefulWidget {
   @override
@@ -40,26 +38,19 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
 
     try {
       final fileName = "${DateTime.now().microsecondsSinceEpoch}.jpg";
-      // final Reference ref =
-      //     FirebaseStorage.instance.ref().child("categories/$fileName");
 
-      // await ref.putFile(selectedImage!);
-      // final imageUrl = await ref.getDownloadURL();
-
-      
-      final docRef =
-          await FirebaseFirestore.instance.collection("categories").add({
+      await FirebaseFirestore.instance.collection("categories").add({
         "name": nameCtrl.text.trim(),
         "description": descCtrl.text.trim(),
         "discount": discountCtrl.text.isEmpty
             ? 0
             : int.tryParse(discountCtrl.text) ?? 0,
-        // "image": imageUrl,
         "createdAt": FieldValue.serverTimestamp(),
       });
 
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Category Added Successfully")));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Category Added Successfully")));
 
       nameCtrl.clear();
       descCtrl.clear();
@@ -68,14 +59,13 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
 
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (_) => ProductListPage(),
-        ),
+        MaterialPageRoute(builder: (_) => ProductListPage()),
       );
     } catch (e) {
       print("ERROR: $e");
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Error: $e")));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Error: $e")));
     }
 
     setState(() => loading = false);
@@ -85,41 +75,72 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text("Add Category"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
+        backgroundColor: Colors.black,
+        elevation: 0,
+        title: Text(
+          "Add Category",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
+
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _label("Category Name"),
+            CustomTextField(
+              hint: "Type category name...",
+              controller: nameCtrl,
+            ),
 
-            CustomTextField(hint: "Category Name"),
+            SizedBox(height: 20),
+            _label("Description"),
+            CustomTextField(hint: "Write something...", controller: descCtrl),
 
             SizedBox(height: 20),
-            
-            CustomTextField(hint: "Description"),
-            
-            SizedBox(height: 20),
-            
-            CustomTextField(hint: "Discount"),
-            
-            SizedBox(height: 20),
-            
+            _label("Discount"),
+            CustomTextField(
+              keyboardType: TextInputType.numberWithOptions(),
+              hint: "0",
+              controller: discountCtrl,
+            ),
+
+            SizedBox(height: 30),
+            Text(
+              "Category Image",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: 10),
             GestureDetector(
               onTap: pickImage,
               child: Container(
                 height: 170,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue),
+                  border: Border.all(color: Colors.black, width: 1.4),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: selectedImage == null
                     ? Center(
                         child: Text(
                           "Upload Image",
-                          style: TextStyle(color: Colors.blue),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       )
                     : ClipRRect(
@@ -129,7 +150,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
               ),
             ),
 
-            SizedBox(height: 30),
+            SizedBox(height: 40),
+
             CustomButton(text: "Save Category", onPressed: uploadCategory),
           ],
         ),
@@ -137,17 +159,13 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     );
   }
 
-  Widget buildField(String label, TextEditingController ctrl,
-      {bool number = false}) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: TextField(
-        controller: ctrl,
-        keyboardType: number ? TextInputType.number : TextInputType.text,
-        decoration: InputDecoration(
-          labelText: label,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-        ),
+  Widget _label(String text) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.w600,
+        fontSize: 15,
       ),
     );
   }
